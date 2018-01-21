@@ -30,7 +30,7 @@ class AddTodo extends React.PureComponent {
         const { input } = this.state;
 
         return (
-            <div>
+            <div className="addTodo">
                 <TextField
                     name="todo"
                     value={input}

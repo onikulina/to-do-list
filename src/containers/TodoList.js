@@ -1,17 +1,24 @@
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import React from "react";
-import { toggleTodo } from "../actions";
+import { deleteTodo, toggleTodo } from "../actions";
 import Todo from "../components/Todo";
 import { List } from 'material-ui/List';
 
-const TodoList = ({todos, onTodoClick}) => (
-    <List data-test="todo-list">
-        {todos.map((todo) => (
-            <Todo key={todo.id} id={todo.id} {...todo} onClick={() => onTodoClick(todo.id)} />
-        ))}
-    </List>
-);
+class TodoList extends React.PureComponent{
+
+    render () {
+        const { todos, onTodoClick, onTodoDelete } = this.props;
+
+        return (
+            <List data-test="todo-list">
+                {todos.map((todo) => (
+                    <Todo key={todo.id} id={todo.id} {...todo} handleCheck={() => onTodoClick(todo.id)} handleDelete={() => onTodoDelete(todo.id)}/>
+                ))}
+            </List>
+        );
+    }
+};
 
 TodoList.propTypes = {
     todos: PropTypes.arrayOf(
@@ -20,7 +27,8 @@ TodoList.propTypes = {
             completed: PropTypes.bool.isRequired,
             text: PropTypes.string.isRequired
         }).isRequired).isRequired,
-    onTodoClick: PropTypes.func.isRequired
+    onTodoClick: PropTypes.func.isRequired,
+    onTodoDelete: PropTypes.func.isRequired
 };
 
 const getVisibleTodos = (todos, filter) => {
@@ -43,8 +51,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onTodoClick: id => {
+        onTodoClick: (id) => {
             dispatch(toggleTodo(id));
+        },
+        onTodoDelete: (id) => {
+            dispatch(deleteTodo(id));
         }
     };
 }

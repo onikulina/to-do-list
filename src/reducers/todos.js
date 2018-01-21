@@ -13,6 +13,10 @@ const todos = (state = [], action) => {
             return state.map((todo) => {
                 return (todo.id === action.id) ? {...todo, completed: !todo.completed} : todo;
             });
+        case "DELETE_TODO":
+            return state.filter((todo) => {
+                return (todo.id !== action.id);
+            });
         default:
             return state;
     }
