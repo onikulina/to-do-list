@@ -8,7 +8,7 @@ import { List } from 'material-ui/List';
 class TodoList extends React.PureComponent{
 
     render () {
-        const { todos, totalCount, onTodoClick, onTodoDelete } = this.props;
+        const { todos, totalCount, onTodoClick, onTodoDelete, touchDevice } = this.props;
 
         const todoHeigh = 48;
         const listHeight = todoHeigh * totalCount;
@@ -16,7 +16,7 @@ class TodoList extends React.PureComponent{
         return (
             <List data-test="todo-list" style={{height: `${listHeight}px`}}>
                 {todos.map((todo, idx) => (
-                    <Todo key={idx} id={todo.id} idx={idx} {...todo} handleCheck={() => onTodoClick(todo.id)} handleDelete={() => onTodoDelete(todo.id)}/>
+                    <Todo key={idx} id={todo.id} idx={idx} {...todo} touchDevice={touchDevice} handleCheck={() => onTodoClick(todo.id)} handleDelete={() => onTodoDelete(todo.id)}/>
                 ))}
             </List>
         );
@@ -32,7 +32,8 @@ TodoList.propTypes = {
         }).isRequired).isRequired,
     onTodoClick: PropTypes.func.isRequired,
     onTodoDelete: PropTypes.func.isRequired,
-    totalCount: PropTypes.number.isRequired
+    totalCount: PropTypes.number.isRequired,
+    touchDevice: PropTypes.bool.isRequired
 };
 
 const getVisibleTodos = (todos, filter) => {

@@ -24,11 +24,11 @@ class Todo extends React.PureComponent {
     }
 
     render() {
-        const { idx, text, handleCheck, handleDelete, completed } = this.props;
+        const { idx, text, handleCheck, handleDelete, completed, touchDevice } = this.props;
         const { hover } = this.state;
 
         let trashIcon = null;
-        if (hover) {
+        if (hover || touchDevice) {
             trashIcon = (
                 <IconButton onClick={handleDelete}>
                     <Trash color={grey300}/>
@@ -54,7 +54,8 @@ Todo.propTypes = {
     handleCheck: PropTypes.func.isRequired,
     completed: PropTypes.bool.isRequired,
     text: PropTypes.string.isRequired,
-    idx: PropTypes.number.isRequired
+    idx: PropTypes.number.isRequired,
+    touchDevice: PropTypes.bool.isRequired
 };
 
 export default Todo;

@@ -34,6 +34,7 @@ class AddTodo extends React.PureComponent {
 
     render() {
         const { input } = this.state;
+        const { width } = this.props;
 
         return (
             <div className="addTodo">
@@ -44,12 +45,13 @@ class AddTodo extends React.PureComponent {
                     style={{margin: "15px"}}
                     onKeyPress={this.handleKeyPress}
                     data-test="input-add-todo"
+                    placeholder={width < 400 ? "add to do" : ""}
                 />
-                <FlatButton
+                {width > 400 && <FlatButton
                     onClick={this.handleSubmit}
                     label="add to do"
                     data-test="button-add-todo"
-                />
+                />}
             </div>
         );
     }

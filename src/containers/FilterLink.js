@@ -2,8 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { setVisibilityFilter } from "../actions";
-import { Badge, FlatButton } from "material-ui";
+import { Badge, FlatButton, IconButton } from "material-ui";
 import { cyan500, grey300 } from 'material-ui/styles/colors';
+import Done from "../icons/done";
+import Progress from "../icons/progress";
+import All from "../icons/all";
 
 class FilterLink extends React.PureComponent {
 
@@ -25,20 +28,38 @@ class FilterLink extends React.PureComponent {
         }
     }
 
+    handleDisplayIcon = () => {
+        const { text } = this.props;
+        switch (text) {
+            case "active":
+                return <Progress/>;
+            case "completed":
+                return <Done/>;
+            default:
+                return <All/>;
+        }
+    }
+
     render() {
-        const { active, text } = this.props;
+        const { active, text, width } = this.props;
+
+        const icon = this.handleDisplayIcon();
 
         return (
             <Badge
                 badgeContent={this.handleDisplayCount()}
                 primary={true}
+                data-test={`filter-${text}`}
                 badgeStyle={{top: "12px", right: "12px", backgroundColor: active ? cyan500 : grey300}}
             >
-                <FlatButton
+                {width > 400 && <FlatButton
                     onClick={this.handleFilterClick}
-                    label={text} disabled={active}
-                    data-test={`filter-${text}`}
-                />
+                    label={text}
+                    disabled={active}
+                />}
+                {width <= 400 && <IconButton onClick={this.handleFilterClick} disabled={active}>
+                    {icon}
+                </IconButton>}
             </Badge>
         );
     }
@@ -54,7 +75,8 @@ FilterLink.propTypes = {
             text: PropTypes.string.isRequired
         }).isRequired).isRequired,
     text: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
+    width: PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state, props) => {
