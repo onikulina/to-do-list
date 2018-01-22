@@ -18,9 +18,12 @@
         "build": "react-scripts build",
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject",
-        "cypress:open": "cypress open"
+        "cypress:open": "cypress open",
+        "deploy" : "npm run build&&gh-pages -d build"
     },
     "devDependencies": {
-        "cypress": "^1.4.1"
-    }
+        "cypress": "^1.4.1",
+        "gh-pages": "^1.1.0"
+    },
+    "homepage": "https://onikulina.github.io/to-do-list"
 }

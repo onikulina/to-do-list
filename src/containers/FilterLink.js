@@ -34,7 +34,11 @@ class FilterLink extends React.PureComponent {
                 primary={true}
                 badgeStyle={{top: "12px", right: "12px", backgroundColor: active ? cyan500 : grey300}}
             >
-                <FlatButton onClick={this.handleFilterClick} label={text} disabled={active} data-test={`filter-${text}`}/>
+                <FlatButton
+                    onClick={this.handleFilterClick}
+                    label={text} disabled={active}
+                    data-test={`filter-${text}`}
+                />
             </Badge>
         );
     }

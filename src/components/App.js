@@ -12,7 +12,6 @@ const App = () => {
     const styles = merge(
         {
             width: "fit-content",
-            margin: "20px",
             padding: "0px 20px"
         },
         $(" .filter", {
