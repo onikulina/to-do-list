@@ -8,12 +8,15 @@ import { List } from 'material-ui/List';
 class TodoList extends React.PureComponent{
 
     render () {
-        const { todos, onTodoClick, onTodoDelete } = this.props;
+        const { todos, totalCount, onTodoClick, onTodoDelete } = this.props;
+
+        const todoHeigh = 48;
+        const listHeight = todoHeigh * totalCount;
 
         return (
-            <List data-test="todo-list">
-                {todos.map((todo) => (
-                    <Todo key={todo.id} id={todo.id} {...todo} handleCheck={() => onTodoClick(todo.id)} handleDelete={() => onTodoDelete(todo.id)}/>
+            <List data-test="todo-list" style={{height: `${listHeight}px`}}>
+                {todos.map((todo, idx) => (
+                    <Todo key={idx} id={todo.id} idx={idx} {...todo} handleCheck={() => onTodoClick(todo.id)} handleDelete={() => onTodoDelete(todo.id)}/>
                 ))}
             </List>
         );
@@ -28,7 +31,8 @@ TodoList.propTypes = {
             text: PropTypes.string.isRequired
         }).isRequired).isRequired,
     onTodoClick: PropTypes.func.isRequired,
-    onTodoDelete: PropTypes.func.isRequired
+    onTodoDelete: PropTypes.func.isRequired,
+    totalCount: PropTypes.number.isRequired
 };
 
 const getVisibleTodos = (todos, filter) => {
@@ -45,7 +49,8 @@ const getVisibleTodos = (todos, filter) => {
 
 const mapStateToProps = state => {
     return {
-        todos: getVisibleTodos(state.todos, state.visibilityFilter)
+        todos: getVisibleTodos(state.todos, state.visibilityFilter),
+        totalCount: state.todos.length
     };
 }
 

@@ -1,12 +1,12 @@
 import React from "react";
 import FilterLink from "../containers/FilterLink";
 
-const Footer = () => (
-    <p className="footer">
+const Filter = () => (
+    <div className="filter">
         <FilterLink filter="SHOW_ALL" text="all" />
         <FilterLink filter="SHOW_ACTIVE" text="active" />
         <FilterLink filter="SHOW_COMPLETED" text="completed" />
-    </p>
+    </div>
 );
 
-export default Footer;
+export default Filter;

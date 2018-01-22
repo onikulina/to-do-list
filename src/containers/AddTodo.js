@@ -26,6 +26,12 @@ class AddTodo extends React.PureComponent {
         }
     }
 
+    handleKeyPress = (e) => {
+        if (e.key === 'Enter'){
+            this.handleSubmit();
+        }
+    }
+
     render() {
         const { input } = this.state;
 
@@ -36,6 +42,7 @@ class AddTodo extends React.PureComponent {
                     value={input}
                     onChange={this.handleInputChange}
                     style={{margin: "15px"}}
+                    onKeyPress={this.handleKeyPress}
                     data-test="input-add-todo"
                 />
                 <FlatButton

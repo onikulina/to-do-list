@@ -1,9 +1,11 @@
 import React from "react";
-import Footer from "./Footer";
+import Filter from "./Filter";
 import AddTodo from "../containers/AddTodo";
 import TodoList from "../containers/TodoList";
 import { Paper } from 'material-ui';
 import { $, merge } from "glamor";
+import { grey50 } from 'material-ui/styles/colors';
+
 
 const App = () => {
 
@@ -13,11 +15,14 @@ const App = () => {
             margin: "20px",
             padding: "0px 20px"
         },
-        $(" .footer", {
+        $(" .filter", {
             textAlign: "center",
         }),
         $(" .addTodo", {
             textAlign: "center",
+        }),
+        $(" .grey", {
+            backgroundColor: grey50,
         }),
     );
 
@@ -25,7 +30,7 @@ const App = () => {
         <Paper {...styles}>
             <AddTodo />
             <TodoList />
-            <Footer />
+            <Filter />
         </Paper>
     );
 };
